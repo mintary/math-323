@@ -1,0 +1,496 @@
+
+
+\chapter{Basic probability}
+
+\section{Foundation}
+
+\subsection{Set identities}
+Let $A, B, C$ be sets, all subsets of $U$.
+\begin{enumerate}
+    \item $A \cup U = A$ and $A \cup \emptyset = A$: Identity laws
+    \item $A \cup U = U$ and $A \cap \emptyset = \emptyset$: Domination laws
+    \item $A \cup A$ and $A \cap A = A$: Idempotent laws
+    \item $\overline{\overline{A}} = A$: Double complement
+    \item $A \cup B = B \cup A$, $A \cap B = B \cap A$: Commutative Laws
+    \item $A \cup (B \cup C) = (A \cup B) \cup C$: Associative laws
+    \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ 
+    
+    $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$: Distributive laws
+    
+    \item $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+
+    $\overline{A \cap B} = \overline{A} \cup \overline{B}$: De Morgan's laws
+
+    An intuitive explanation: We can say that $A$ is all the days that it rains and $B$ is all the days that it snows. Then $\overline{A \cup B}$ means all days where it does not rain or snow. This is the same as saying that we are looking at all days where it does not rain \textit{and} all the days it does not snow ($\overline{A} \cap \overline{B})$.
+
+    Similarly, we can say that $\overline{A \cap B}$ means all days where it does not snow and rain simultaneously. Then this is the same as saying all days where it either does not snow, or all days where it does not rain. If it never snows, then we'll never get a day where it rains or snows simultaneously. If it never rains, then we'll never get a day where it rains or snows simultaneously. Hence this is the same as saying that $\overline{A} \cup \overline{B}$.
+    
+    \item $A \cup (A \cap B) = A$
+
+    $A \cap (A \cup B) = A$: Absorption laws
+
+    \item $A \cup \overline{A} = U$
+
+    $A \cap \overline{A} = \emptyset$: Complement laws
+\end{enumerate}
+
+\dfn{Random experiment}{
+    A process for making an observation of observations whose outocme cannot be predicted with certainty.
+}
+
+\dfn{Event}{
+    Each repetition of a random experiment is known as a \textbf{trial}. The outcome is known as an \textbf{event}. Events can be represented as a set of outcomes.\\
+
+    A \textbf{simple event} consists of the outcome of one trial.\\
+
+    A \textbf{compound event} consists of two or more composed simple events.
+}
+
+\dfn{Sample space}{
+    The set of all possible outcomes of an experiment, denoted $S$.
+}
+
+\ex{}{
+    The \textbf{sample space} of a die toss is $\{ 1, 2, 3, 4, 5, 6\}$.\\
+
+    The \textbf{sample space} of picking 2 workers in any order from 3 (where $W_{i}$ denotes the worker) is: $\{(W_{1}, W_{2}), (W_{2}, W_{3}), (W_{1}, W_{3}) \}$.\\
+
+    The \textbf{sample space} of picking 2 workers in a specific order from 3 (where $W_{i}$ denotes the worker) is: $\{ (W_{1}, W_{2}), (W_{1}, W_{3}), (W_{2}, W_{1}), (W_{2}, W_{3}), (W_{3}, W_{1}) (W_{3}, W_{3}) \}$.
+}
+
+
+\section{Kolmogorov's Axioms}
+
+\dfn{Kolmogorov's Axioms}{
+Consider an experiment with sample space $S$. To every event $A \subseteq S$, we associate a number $P(A)$ called the probabiltiy of $A$, such that following axioms hold:
+    \begin{enumerate}
+        \item $P(A) \ge 0$
+        \item $P(S) = 1$
+        \item If $E_{1}, E_{2}, ...$ are events in $S$ such that $E_{1} \cap E_{j} = \emptyset$ for $i \not - j$ (disjoint, mutually exclusive events), then:
+        $$P(E_{1} \cup E_{2} \cup E_{3} ... ) = \sum_{i=1}^{\infty} P(E_{i})$$
+    \end{enumerate}
+
+    \nt{Axiom 3 can be stated in terms of a finite union of events, as $$P(E_1 \cup E_2 \cup E_3 ... \cup E_n = \sum_{i=1}^{n} P(E_i)$$.
+
+    Axiom 3 is necessary to prove the five theorems - we can express the probabilities of disjoint events as a sum of their individual probabilities.
+    }
+
+}
+
+\thm{Five Theorems}{
+    \begin{enumerate}
+        \item For any event $A$, $P(A^c) = 1 - P(A)$.
+        \item $P(\emptyset) = 0$.
+        \item $P(A \cap B^c) = P(A) - P(A \cap B)$.
+        \item If $A \subseteq B$, then $P(A) \le P(B)$.
+        \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+    \end{enumerate}
+
+    \nt{
+        For proofs (of not just the five theorems), it is useful to rewrite events as disjoint events so we can use axiom 3.
+    }
+
+    \pf{Theorem 4}{
+        $$B = A \cup (A^c \cap B)$$
+        $$P(B) = P(A) + P(A^c \cap B)$$
+        $$P(A^c \cap B) \ge 0$$
+        $$\implies P(B) \ge P(A)$$
+    }
+
+    \pf{Theorem 5}{
+
+        $$A \cup B = (A \cap B^c) \cup (A \cap B) \cup (A^c \cap B)$$
+        $$P(A \cup B) = P(A \cap B^c) + P(A \cap B) + P(A^c \cap B)$$
+        $$P(A \cup B) = P(A) - P(A \cap B)) + P(A \cap B) + P(B) - P(A \cap B)$$
+        $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$ 
+    }
+}
+
+\thm{Probability of an event}{
+    Let $S$ be a finite sample space with $N$ equally likely events. Let $E$ be an event in $S$. Then:
+
+    $$P(E) = \frac{n}{N}$$
+
+    Where $n$ is the number of outcomes in $E$, or the number of possible ways $E$ can occurs, and $N$ is the number of outcomes in $S$.
+
+    \pf{Proof}{
+        Write $E$ as union of simple events:
+
+        $$E = \bigcup_{i=1}^{n} E_{i}$$
+
+        Since the simply events are disjoint:
+
+        $$P(E) = \bigcup_{i=1}^{n} P(E_{i})$$
+
+        $$S = \bigcup_{i=1}^{n} P(E_{i})$$
+
+        $$P(S) = \sum_{i=1}^{N} P(E_{i})$$
+
+        Since all events $E_{i}$ are equally likely:
+
+        $\sum_{i=1}^{n} P(E_{i}) = \sum_{i=1}^{n} (\frac{1}{N}) = \frac{n}{N}$
+    }
+}
+
+\section{Counting rules}
+
+\begin{enumerate}
+    \item \textbf{Multiplication rule:} If two sets $A$ and $B$ have $n_1$ distinct objects and $n_2$ distinct objects respectively, then the number of ways to choose an object from $A$ and an object from $B$ is $n_1 \times n_2$.
+        \subitem \textbf{Extension to $k$ sets:} The number of ways to form a set by choosing an object from each of the sets is $n_1 \times n_2 \times ... \times n_k$.
+    \item \textbf{Arranging $n$ distinct objects:} The number of ways to arrange $n$ distinct objects (by selecting one without replacement) is $n!$.
+    \item \textbf{Permutations:} Arranging $n$ distinct objects chosen $r$ at a time without replacement, where order is important, is known as permutation.
+
+    \dfn{Permutation}{
+        Number of ways to arrange $n$ distinct objects chosen $r$ at a time without replacement, where order matters.
+
+        $$\Perm{n}{r} = \frac{n!}{(n-r)!}$$
+    
+    }
+
+    \item \textbf{Combinations:} Arranging $n$ distinct objects chosen $r$ at a time without replacement, where order is unimportant, is known as combination.
+
+    \dfn{Combination}{
+        Number of ways to arrange $n$ distinct objects chosen $r$ at a time without replacement, where order does not matter.
+
+        $$\binom {n}{c} = \frac{n!}{(n-r)!r!}$$
+    }
+
+    \dfn{Multinomial coefficient}{
+        The number of ways of partitioning $n$ distinct objects into $k$ distinct subsets of sizes:
+        $$n_1, n_2, ... n_k$$
+
+        where
+
+        $$\sum_{i=1}^{k} n_i = n$$
+
+        is
+
+        $$N = \binom{n}{\begin{array}{c}
+        n_1, n_2, \dots, n_k
+        \end{array}} = \frac{n!}{k_1! k_2! \cdots k_r!}$$
+    }
+    
+\end{enumerate}
+
+\qs{The Birthday Problem}{
+    Suppose you have $n$ friends. You wish to find the probability that at least two of your friends have the same birthday.
+}
+
+\sol{}{
+    Sample space is given by:
+    $$S = \{ (Jan 1, Jan 1, ... Jan 1), (Jan 2, Jan 2, ... Jan 3), ... (Dec 31, Dec 31, ... Dec 31) \}$$
+
+    We create a tuple representing a possible combination of everyone's birthdays.\\
+
+    Represent the event that at least two friends have the same birthday as $E$. Then $E^c$ is the event that no two friends have the same birthday.
+
+    $$P(E) = 1- P(E^c)$$
+    $$P(E) = \frac{n'}{N}$$
+
+    where $n' = $ number of outcomes in $E^c$.\\
+
+    Number of simple events is given by $365^n$, since each person's birthday is distinct and unaffected by another person's birthday. So $N = 365^n$.\\
+
+    Number of outcomes favorable to $E^c$ includes counting the number of ways to arrange $365$ distinct birthdays, chosen $n$ at a time. The order does matter - if person $A$ is born on $Jan 1$, then the second person can only be born on $Jan 2, Jan 3, ... Dec 31$. So the next person has $1$ less possibilities of birthdays from the previous person. \\
+
+    $$n' = \frac{365!}{(365 - n)!}$$
+    $$n' = 365 \times 364 \times 363 \times (365 - n + 1)$$
+
+
+    $$P(E) = 1 - \frac{n'}{N}$$
+    $$P(E) = 1 - \frac{365 \times 364 \times 363 \times (365 - n + 1}{365^n}$$
+    $$P(E) = 1 - \frac{365!}{(365^n)(365 - n)!}$$
+}
+
+\qs{Splitting sample space}{
+    A student is instructed to choose $m$ questions from a test with $M$ questions. What is the probability that the student chooses $x$ from the first $a$ and $m-x$ from the last $M-a$?
+}
+
+\sol{}{
+    First find the number of outcomes in the sample space ($N$). Order does not matter, the student can choose $m$ questions in any order they wish. Therefore:
+
+    $$N = \binom {M}{m}$$
+
+    Choosing from section $a$ will yield a different subset of events than choosing from section $M - a$. In both sections, we do not care about the order. Since these are always disjoint, we can apply the multiplication rule, such that if $n_1$ is the number of ways of choosing $x$ from the first $a$, and $n_2$ is the number of ways of choosing $m-x$ from $M-a$, then the number of ways of picking a certain subset from both is $n_1 \times n_2$.\\
+
+    Choosing $x$ from the first $a$:
+
+    $$n_1 = \binom {a}{x}$$
+
+    Choosing $M - x$ from the last $M - a$:
+
+    $$n_2 = \binom {M-a}{m-x}$$
+
+    Therefore:
+
+    $$P(E) = \frac{\binom {a}{x} \binom {M-a}{m-x}}{\binom {M}{m}}$$
+}
+
+\section{Conditional probability}
+
+\dfn{Conditional probability}{
+    Let $A$ and $B$ be two events, such that $P(A) \not = 0$, then:
+
+    $$P(B | A) = \frac{P(A \cap B)}{P(A)}$$
+
+    That is, the probability of $A$ occurring given that $B$ has occurred. In the presence of updated knowledge, probability can change.
+}
+
+
+\cor{}{
+    $$P(B | A) \ge 0$$
+
+    Since $P(A \cap B) \ge 0$, whereas $P(A) > 0$.
+}
+
+\cor{}{
+    $$P(S | A) = 1$$
+
+    Since $P(S|A) = \frac{P(A \cap S)}{P(A)} = \frac{P(A)}{P(A)}$
+}
+
+\cor{}{
+    $$P(\bigcup_{i=1}^{\infty} B_i | A) = \sum_{i=1}^{\infty} P(B_i | A)$$
+
+    where $B_i \cap B_j = \emptyset$ for $i \not = j$
+}
+
+With the definition of conditional probability, we can determine the intersection of several events as multiple chained conditional probabilities. Given:
+
+$$P(A_1 \cap A_2 \cap A_3)$$
+
+We can read this as: the probability that $A_3$ occurs given that $A_1$ and $A_2$ have occurred, times the probability that $A_1$ and $A_2$ have occurred. Then the probability of $A_1$ and $A_2$ both occurring is the probability that $A_2$ occurred given $A_1$ occurred, times the probability that $A_1$ occurred:
+
+$$P(A_1 \cap A_3 \cap A_3) = P(A_3 | A_1 \cap A_2) \times P(A_1 \cap A_2)$$
+$$P(A_1 \cap A_3 \cap A_3) = P(A_3 | A_1 \cap A_2) \times P(A_2 | A_1) P(A_1)$$
+
+
+\thm{Multiplication rule for conditional probability}{
+    $$P(\cap_{i=1}^{n} A_i) = P(A_n | A_1 \cap ... \cap A_{n-1}) \times P(A_1 \cap ... \cap A_{n-1}) \times ... \times P(A_2 | A_1) P(A_1)$$
+}
+
+\section{The law of total probability}
+
+\dfn{Partition of $S$}{
+    For some positive integer $k$, let the sets $B_1, B_2, ... B_k$ be such that:
+    \begin{enumerate}
+        \item $S = B_1 \cup B_2 \cup ... \cup B_k$.
+        \item $B_i \cap B_j = \emptyset$ for $i \not = j$
+    \end{enumerate}
+
+    Then the collection of sets $B_1, B_2, ... B_k$ is said to be a \textbf{partition} of $S$.
+}
+
+\thm{Law of total probability}{
+    If $A \subseteq S$ and $B_1, B_2, ... B_k$ is a partition of $S$, $A$ can be expressed as:
+
+    $$A = (A \cap B_1) \cup (A \cap B_2) \cup ... \cup (A \cap B_k)$$ 
+
+    where each $(A \cap B_i)$ and $(A \cap B_j)$ is disjoint (since each $B_i \cap B_j = \emptyset$).\\
+
+    Let $\{ B_1, B_2, ... B_k \}$ be a partition of $S$, such that $P(B) > 0$, for $i = 1, 2, ...k$. Then for any event $A$ in $S$:
+
+    $$P(A) = \sum_{i=1}^{k} P(A | B_i) (P(B_i)$$
+}
+
+\pf{Proof}{
+    $$P(A) = P((A \cap B_1) \cup (A \cap B_2) \cup ... \cup (A \cap B_k))$$
+    $$P(A) = P(A \cap B_1) + P(A \cap B_2) + ...  + P(A \cap B_k))$$
+    $$P(A) = P(A|B_1) P(B_1) + ... + P(A | B_k) P(B_k)$$
+    $$P(A) = \sum_{i=1}^{k} P(A | B_i) P(B_i)$$
+}
+
+\qs{Identical balls in a box}{
+    Assume there are three identical boxes with 10 balls each. Box 1 has 7 red and 3 green balls, box 2 has 6 red and 4 green balls, and box 3 has 5 red and 5 green balls. A box is chosen at random and a ball is picked. What is the probability that the ball is red?
+}
+
+\sol{}{
+    Define the following events:
+    $R:$ The chosen ball is red.\\
+    $B_1:$ The ball is chosen from box 1.\\
+    $B_2:$ The ball is chosen from box 2.\\
+    $B_3:$ The ball is chosen from box 3.\\
+
+    We have the following information:\\
+    $P(B_i) = \frac{1}{3}$ for $i = 1, 2, 3$\\
+    $P(R|B_1) = 0.7$\\
+    $P(R | B_2) = 0.6$\\
+    $P(R | B_3) = 0.5$\\
+
+    Then:
+    $$P(R) = \sum_{i=1}^{3} P(R|B_i) P(B_i)$$
+    $$P(R) = P(R|B_1)P(B_1) + P(R|B_2)P(B_2) + P(R|B_3) P(B_3)$$
+    $$P(R) = \frac{7}{10} \times \frac{1}{3} + \frac{6}{10} \times \frac{1}{3} + \frac{5}{10} \times \frac{1}{3}$$
+
+    Key takeaway: it is possible to express the probability of an event as multiple conditional probabilities, as well as the probabilities that the conditional probabilities will occur.
+}
+
+\thm{Bayes' Theorem}{
+    Let $\{ B_1, B_2, ..., B_k\}$ be a partition of $S$ such that $P(B_i) > 0$, for $i = 1, 2, ... k$. Then for any event $A$ in $S$:
+
+    $$P(B_i | A) = \frac{P(A|B_i) P(B_i)}{\sum_{i=1}^{k} P(A|B_i) P(B_i)}$$
+}
+
+\nt{
+    This theorem allows us to find the reverse of one or more conditional probabilities. That is, given $P(A | B_i)$, find $P(B_i | A)$. Finding $P(A)$ from multiple conditional and unconditional probabilities requires the law of total probability.
+}
+
+\qs{Diagnostic test}{
+    A diagnostic test for a disease is such that it (correctly) detects the disease in 90\% of individuals who actually have the disease. If a person does not have the disease, the test will report that they do not have it with accuracy of 90\%.\\
+
+    Only 1\% of the population has the disease. If a person is chosen at random and the diagnostic test indicates that they have the disease, what is the probability that the person actually has the disease?\\
+}
+
+\sol{}{\\
+    Define the following events:\\
+    $D:$ Person has the disease\\
+    $Pos:$ Test is positive\\
+    $D^c:$ Person does not have the disease\\
+    $Pos^c$: Person is negative.\\
+    $P(Pos|D) = 0.9$\\
+    $P(Pos^c | D^c) = 0.9$\\
+    $P(D) = 0.01 \implies P(D^c) = 0.99$\\
+
+    We are looking for $P(D|Pos)$.\\
+
+    $$P(Pos | D^c) = 1 - P(Pos^c | D^c) = 0.1$$
+
+    $$P(D|Pos) = \frac{P(Pos | D) \times P(D)}{P(Pos | D) \times P(D) + P(Pos | D^c) P(D^c)}$$
+    $$P(D | Pos) = \frac{1}{12}$$
+
+}
+
+\dfn{Sensitivity}{
+    The probability that a test detects the disease given that the patient has the disease.
+    $$P(Pos | D)$$
+}
+
+\dfn{Specificity}{
+    The probability that a test indicates no disease given that the patient is disease free.
+
+    $$P(Pos^c | D^c)$$
+}
+
+\dfn{Positive predictive value}{
+    The probability that a patient has the disease given that the test positive.
+
+    $$P(D | Pos)$$
+}
+
+\section{Independence}
+
+\dfn{Independence of two events}{
+    Two events $A$ and $B$ are independent $\Longleftrightarrow$ $P(B|A) = P(B)$.\\
+
+    We write that $A \Indep B$, or that $B \Indep A$.
+}
+
+\thm{}{
+    Two events $A$ and $B$ are independent $\Longleftrightarrow$ $P(A \cap B) = P(A)P(B)$.
+}
+
+\pf{Proof}{
+    Suppose $A$ and $B$ are independent. Then by definition, $P(B|A) = P(B)$.
+    Therefore:
+
+    $$P(A \cap B) = P(B|A) P(A)$$
+    $$P(A \cap B) = P(B) P(A)$$
+    $$P(A) = P(A) P(B)$$
+
+    Conversely, assume $P(A \cap B) = P(A)P(B)$. Then:
+    $$P(B|A) = \frac{P(A \cap B)}{P(A)}$$
+    $$P(B|A) = \frac{P(A)P(B)}{P(A)}$$
+    $$P(B|A) = P(B)$$
+}
+
+\dfn{Mutual independence}{
+    Events $A_1, A_2, ... , A_n$ are said to be mutually independent if:
+
+    $$P(A_1 \cap A_2 \cap ... \cap A_k) = P(A_1) \times P(A_2) \times ... \times P(A_k)$$
+
+    for any collection of events selected from $A_1, A_2, ... A_n$.
+}
+
+\dfn{Pairwise independence}{
+    The events $A_1, A_2, ..., A_n$ are said to be pairwise independent if for any two events $A_i$ and $A_j$:
+
+    $$P(A_i \cap A_j) = P(A_i)P(A_j)$$
+
+    for any $i \not = j$.
+}
+
+\nt{
+    Pairwise independence does not imply mutual independence.
+}
+
+\cor{}{
+    If $B \Indep A$, then:
+    \begin{enumerate}
+        \item $A \Indep B^c$
+        \item $B \Indep A^c$
+        \item $A^c \Indep B^c$
+    \end{enumerate}
+}
+
+\pf{Proof}{
+    Proof that $A \Indep B^c$. Show that $P(A \cap B^c) = P(A) P(B^c)$.
+
+    $$P(A \cap B^c) = P(A) P(B^c | A)$$
+    $$P(A \cap B^c) = P(A)(1- P(B|A))$$
+    $$P(A \cap B^c) = P(A) (1-P(B))$$
+
+    From the right side:
+
+    $$P(A)P(B^c) = P(A)(1-P(B))$$
+
+}
+
+\thm{Independence between two sets of events}{
+    Let $U = \{ A_1, ... A_k$ and $W = \{ B_1, ... B_l \}$. Then $U \Indep W$ if the probability of the intersection of every $A'_{i}s$ with intersection of every set of $B'_{i}s$ is equal to the product of the probabilities of their intersections.
+}
+
+\qs{}{
+    Toss a fair coin repeatedly until you observe the first head at which point you stop. Let $A$ be the event that a head occurs at the sixth toss. What is $P(A)$?
+
+}
+
+\sol{}{
+    We are looking for the event $A = T \cap T \cap ... \cap H$.
+
+    Then $P(A) = P(T \cap T \cap... \cap H)$. Since all coin tosses are independent, we can write:
+
+    $$P(A) = (P(T))^5 \times P(H)$$
+    $$P(A) = (\frac{1}{2})^6$$
+    $$P(A) = \frac{1}{64}$$
+}
+
+\thm{Independence and mutual exclusivity}{
+    Let $A$ and $B$ be two events, with $P(A) \not = 0$ and $P(B) \not = 0$. If $A$ and $B$ are mutually exclusive, then they are not independent.
+}
+
+\thm{Independence and mutual exclusivity when empty set}{
+    Two mutually exlusive events $A$ and $B$ are independent only if either $P(A) = 0$ or $P(B) = 0$.
+}
+
+\pf{Proof}{
+    Both of these theorems can be proved by checking $P(A) P(B)$ and comparing to $P(A \cap B)$.
+}
+
+\subsection{Union of independent events}
+
+Identify one of the following:\\
+
+\begin{enumerate}
+    \item $P(A \cap B) = 0$ (mutual exclusivity)
+    \item $P(A \cap B) = P(A) P(B)$ (independent events)
+    \item $P(A \cap B) = P(A) P(B | A) = P(B) P(A | B)$ (non-independent events)
+\end{enumerate}
+
+Then use $P(A \cap B) = P(A) + P(B) - P(A \cup B)$.
+
+\ex{Union of several independent events}{
+    $$P(A_1 \cup A_2 \cup ... \cup A_n) = 1 - P(A_1 \cup A_2 \cup ... \cup A_n)^c$$
+    $$P(A_1 \cup A_2 \cup ... \cup A_n) = 1-P(A^c_1 \cap A^c_2 \cap ... \cap A^c_n)$$
+    $$P(A_1 \cup A_2 \cup ... \cup A_n) = 1-P(A^c_1)P(A^c_2) ... P(A^c_n)A$$
+    $$P(A_1 \cup A_2 \cup ... \cup A_n) = 1-(1-P(A_1))(1-P(A_2)) ... (1-P(A_n))$$
+}

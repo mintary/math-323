@@ -1,0 +1,26 @@
+\documentclass{report}
+\input{latex_template/preamble}
+\input{latex_template/macros}
+\input{latex_template/letterfonts}
+\usepackage{float}
+\newcommand*{\Perm}[2]{{}^{#1}\!P_{#2}}%
+\newcommand{\Indep}{\perp \!\!\! \perp}%
+\title{\Huge{MATH 323}\\Notes}
+\author{\huge{Emily Wang}}
+\date{}
+
+\begin{document}
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\input{chapters/1_foundations}
+\input{chapters/2_discrete_dist}
+\input{chapters/3_continuous_dist}
+\input{chapters/4_random_var_functions}
+\input{chapters/5_multivar_dist}
+
+\end{document}

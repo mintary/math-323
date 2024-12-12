@@ -1,0 +1,529 @@
+
+\chapter{Multivariate distribution}
+
+\dfn{Multivariate distribution}{
+    A multivariate distribution describes the joint behaviour of two or more random variables. That is, the simultaneous occurrence of two distinct events.
+}
+
+\ex{}{
+    Consider tossing two fair coins. Define the first variable $y_1$ to represent the number of heads for coin 1, with support $\{0, 1 \}$. Define the second variable $y_2$ to represent the number of heads for coin 2, with support $\{0, 1 \}$.
+
+    The values that both of them take, jointly, can be represented as:
+    $$\{(0, 0), (1, 0), (0, 1), (1, 1) \}$$
+
+    We are looking for $P(Y_1 = y_1 \cap Y_2 = y_2)$, where $y_1$ and $y_2$ represent events.
+
+    Notice that these can be represented as points on a 2D plane.
+}
+
+\dfn{Discrete multivariable probability distribution}{
+    Let $Y_1$ and $Y_2$ be discrete random variables. The joint (or bivariate) probability function for $Y_1$ and $Y_2$ is given by:
+    $$p(y_1, y_2) = P(Y_1 = y_1 \cap Y_2 = y_2)$$
+    $$= P(Y_1 = y_1, Y_2, = y_2)$$
+    $$-\infty < y_1 < \infty, -\infty < y_1 < \infty$$
+}
+
+If $Y_1$ and $Y_2$ are discrete random variables with joint probability mass function $p(y_1, y_2)$, then:
+\begin{enumerate}
+    \item $p(y_1, y_2) \ge 0$ for all $y_1, y_2$.
+    \item $\sum_{y_1, y_2} p(y_1, y_2) = 1$
+\end{enumerate}
+
+\ex{}{
+    Roll two fair dice and define:
+    \begin{enumerate}
+        \item $Y_1$: The number appearing on die 1.
+        \item $Y_2$: The number appearing on die 2.
+    \end{enumerate}
+}
+
+Then $p(y_1, y_2) = \frac{1}{36}$.
+
+\dfn{CDF of discrete multivariable probability distribution}{
+    $$F_{Y_1, Y_2} (y_1, y_2) = P(Y_1 \le y_1, Y_2 \le y_2)$$
+    $$\sum_{t_1 \le y_1} \sum_{t_2 \le y_2} P_{Y_1, Y_2} (t_1, t_2)$$
+}
+
+
+\dfn{Jointly continuous multivariate probability distribution}{
+    The random variables $Y_1$ and $Y_2$ are jointly continuous if their joint CDF $F_{Y_1, Y_2} (y_1, y_2)$ is continuous in both $y_1$ and $y_2$. Then the joint CDF of $Y_1, Y_2$ is the function such that 
+    $$F_{Y_1, Y_2} (y_1, y_2) = P(Y_1 \le y_1, Y_2 \le y_2)$$
+    $$=\int_{-\infty}^{y_1} \int_{-\infty}^{y_2} f_{Y_1, Y_2} (t_1, t_2) dt_2 dt_1$$
+
+    Generally,
+    $$P(Y_1, Y_2) \in A = \int \int_{A} f_{Y_1, Y_2} (y_1, y_2) dy_1 dy_2$$
+
+    $$P(a_1, \le Y_1 \le a_2, b_1 \le Y_2 \le b_2)$$
+    $$= \int_{a_1}^{a_2} \int_{b_1}^{b_2} f_{Y_1, Y_2} (y_1, y_2) dy_2 dy_1$$
+}
+
+\ex{}{
+    Consider the PDF:
+    \begin{equation}
+        f(y_1, y_2) = 
+        \begin{cases}
+            1 & 0 \le y_1 \le 1, 0 \le y_2 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+
+    To find $F(0.2, 0.4)$:
+    $$F_{Y_1, Y_2} (y_1, y_2) = \int_{-\infty}^{y_1} \int_{-\infty}^{y_2} f(y_1, y_2) dy_2 dy_1$$
+    $$F_{Y_1, Y_2} (0.2, 0.4) = \int_{-\infty}^{0.2} \int_{-\infty}^{0.4} 1 dy_2 dy_1$$
+    $$ = \int_{0}^{0.2} |y_2|_{0}^{0.4} dy_1$$
+    $$ = \int_{0}^{0.2} 0.4 dy_1$$
+    $$ = 0.08$$
+}
+
+\dfn{Marginal probability distribution}{
+    Let $Y_1$ and $Y_2$ be jointly discrete random variables with PMF $p(y_1, y_2)$. Then the marginal probability function of $Y_1$ and $Y_2$ are:
+    $$P_{Y_1} (y_1) = \sum_{\text{ all } y_2} P(y_1, y_2)$$
+}
+
+\ex{}{
+    The marginal probability for a dice roll is $P(y_1, 1) + P(y_1, 2) ... + P(y_1, 6) = \frac{6}{36}$.
+}
+
+\dfn{PMF of marginal probability distributions}{
+    Let $Y_1, Y_2$ be jointly discrete random variables with pmf $p(y_1, y_2)$. Then the marginal pmfs of $Y_1$ and $Y_2$ are:
+    $$P(Y_1 = y_1) = \sum_{y_2} p(y_1, y_2)$$
+    $$P(Y_2 = y_2) = \sum_{y_1} p(y_1, y_2)$$
+
+    Let $Y_1, Y_2$ be jointly continuous random variables with pdf $f_{Y_1, Y_2} (y_1, y_2)$. Then the marginal pdfs of $Y_1$ and $Y_2$ denoted by $f_{Y_1} (y_1)$ and $f_{Y_2} (y_2)$ are given by:
+    $$f_{Y_1} (y_1) = \int_{-\infty}^{\infty} f_{Y_1, Y_2} (y_1, y_2) dy_2$$
+    $$f_{Y_2} (y_2) = \int_{-\infty}^{\infty} f_{Y_1, Y_2} (y_1, y_2) dy_1$$
+}
+
+\ex{}{
+    Consider
+    \begin{equation}
+        f(y_1, y_2) = 
+        \begin{cases}
+            2y_1 & 0 \le y_1 \le 1, 0 \le y_2 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Find the marginal PDFs.
+}
+\ex{}{
+    $f_{Y_1} (y_1) = \int_{-\infty}^{\infty} f(y_1, y_2) dy_2$
+    $$ = \int_{0}^{1} 2y_1 dy_2$$
+    $$ = 2y_1 \int_{0}^{1} dy_2$$
+    $$ = 2y_1 | y_2 |_{0}^{1}$$
+    \begin{equation}
+        f_{Y_1} (y_1) = 
+        \begin{cases}
+            2y_1 & 0 \le y_1 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+
+    $f_{Y_2} (y_2) = \int_{-\infty}^{\infty} f(y_1, y_2) dy_1$
+    $$ = \int_{0}^{1} 2y_1 dy_1$$
+    $$ = | y_1^2 |_{0}^{1}$$
+    $$ = 1$$
+    \begin{equation}
+        f_{Y_2} (y_2) = 
+        \begin{cases}
+            1 & 0 \le y_2 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+}
+
+\dfn{Conditional probability distribution}{
+    \textbf{Discrete case}: The conditional probability distribution is derived from the joint probability and the marginal probability.
+    $$ P_{Y_1 | Y_2 = y_2} (y_1 | y_2) = \frac{p(y_1, y_2)}{p_{y_2}({y_2})} $$
+    \textbf{Continuous case}: 
+    $$f_{Y_1 | Y_2 = y_2} (y_1 | y_2) = \frac{f(y_1, y_2)}{f_{y_2} (y_2)}$$
+    $$f_{Y_2 | Y_1 = y_1} (y_2 | y_1) = \frac{f(y_1, y_2)}{f_{y_1} (y_1)}$$
+}
+
+\ex{}{
+    Consider
+    \begin{equation}
+        f(y_1, y_2) = 
+        \begin{cases}
+            2y_1 & 0 \le y_1 \le 1, 0 \le y_2 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Where the maginal probabilities are:
+    $$f_{Y_1} (y_1) = 2y_1$$
+    $$ 0 \le y_1 \le 1$$
+    $$f_{Y_2} (y_2) = 1$$
+    $$ 0 \le y_2 \le 1$$
+    $$f_{Y_1 | Y_2 = 0.5 } = \frac{f(y_2, y_1)}{f_{Y_2} (y_1)}$$
+    $$ = \frac{2y_1}{1}$$
+    $$ = 2y_1$$
+    $$f_{Y_2 | Y_1 = 0.5 } = \frac{f(y_2, y_1)}{f_{Y_1} (y_1)}$$
+    $$ - \frac{2y_1}{2y_1}$$
+    $$ = 1$$
+
+    This implies that 
+    $$f(Y_2 | Y_1 = y_1) = f(y_2)$$
+    $$f(Y_1 | Y_2 = y_2) = f(y_1)$$
+
+    Or the probabilities are independent of each other.
+}
+
+\ex{}{
+    A soft-drink machine has a random amount $Y_2$ (in gallons) in supply at the beginning of a given day and dispenses a random amount $Y_1$ during the day, with the condition $Y_1 \le Y_2$. Joint density function:
+    \begin{equation}
+        f(y_1, y_2) = 
+        \begin{cases}
+            \frac{1}{2} & 0 \le y_1 \le y_2 \le 2 \\
+            0 & \text{ elsewhere }
+        \end{cases}
+    \end{equation}
+    \begin{enumerate}
+        \item Find the conditional density of $Y_1$ given $Y_2 = y_2$.\\
+        \item Evaluate the probability that less than $\frac{1}{2}$ gallons is sold, given that the machine contains 1.5 gallons at the start of the day.
+    \end{enumerate}
+}
+
+\sol{}{
+    (1) Have that:
+    $$f_{Y_1 | Y_2 = y_2} (y_1 | y_2) = \frac{f(y_1, y_2)}{f(y_2)}$$
+    $$f_{Y_2} (y_1) = \int_{0}^{y_2} f(y_1, y_2) dy_1$$
+    $$ = \int_{0}^{y_2} \frac{1}{2} dy_1$$
+    $$ = \frac{1}{2} \int_{0}^{y_2} dy_1$$
+    $$ = \frac{1}{2} | y_1 |_{0}^{y_2}$$
+    $$ = \frac{y_2}{2}$$
+
+    $$f_{Y_1 | Y_2 = y_2} (y_1 | y_2) = \frac{f(y_1, y_2)}{f_{Y_2} (y_2)}$$
+    $$ = \frac{1/2}{y_2 / 2}$$
+    $$ = \frac{1}{y_2}$$
+    where $0 < y_2 \le 2$.
+
+    (2) 
+    $$P(Y_1 < 1/2 | Y_2 = 1.5) = \int_{0}^{1/2} f_{Y_1 | Y_2 = y_2} (y_1 | y_2) dy_1$$
+    $$ = \int_{0}^{1/2} \frac{1}{y_2} dy_1$$
+    $$ = \frac{1}{y_2} | y_1 |_{0}^{1/2}$$
+    $$ = \frac{1}{2} \cdot \frac{1}{y_2}$$
+    $$ = \frac{1}{2} \cdot \frac{1}{1.5}$$
+    $$ = \frac{1}{3}$$
+}
+
+\section{Expectation and variance}
+
+\dfn{Expected value}{
+    Let $g(Y_1, Y_2)$ be some function of $Y_1$ and $Y_2$, then
+    $$E(g(Y_1, Y_2)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (g(Y_1, Y_2))f_{Y_1, Y_2} (y_1, y_2) dy_1 dy_2$$
+    $$E(g(Y_1, Y_2)) = \sum_{\text{ all } y_1} \sum_{\text{ all } y_2} (g(Y_1, Y_2)P(Y_1 = y_1, Y_2 = y_2))$$
+
+    The expected value of $E(Y_1)$ is given by:
+    $$E(Y_1) = \int_{-\infty}^{\infty} y_i f_{Y_i} (y_i) dy_i$$
+
+    The expected value of any power of the random variable by:
+    $$E(Y_i^k) = \int_{-\infty}^{\infty} y^k_i f_i (y_i) dy_i$$
+}
+
+
+\ex{}{
+    Let $Y_1, Y_2$ be joint density function given by
+     \begin{equation}
+        f_{Y_1} (y_1) = 
+        \begin{cases}
+            2y_1 & 0 \le y_1 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+
+    Find $E(Y_1)$ and $E(Y_2)$.
+}
+
+\sol{}{
+    $$E(Y_1) = \int_{-\infty}^{\infty} y_1 f(y_1) dy_1$$
+
+    We know that $f_{Y_1} (y_1) = 2y_1$, and also $f_{Y_2} (y_2) = 1$. Therefore:
+    $$E(Y_1) = \int_{0}^{1} y_1 \cdot 2y_1 dy_1$$
+    $$ = 2 \cdot \frac{y_1^3}{3} |_{0}^{1}$$
+    $$ = \frac{2}{3}$$
+
+    $$E(Y_2) = \int_{0}^{1} y_2 \cdot 1 dy_2$$
+    $$ = | \frac{y_2^2}{2} |_{0}^{1}$$
+    $$ = \frac{1}{2}$$
+
+    Now to find $Var(Y_1)$ and $Var(Y_2)$.
+    $$Var(Y_1) = E(Y_1^2) - (E(Y_1))^2$$
+    $$E(Y_1^2) = \int_{-\infty}^{\infty} y_1^2 (2y_1) dy_1$$
+    $$ = | \frac{2y_1^4}{4} |_{0}^{1}$$
+    $$ = \frac{1}{2}$$
+
+    $$Var(Y_1) = E(Y_1^2) - [E(Y_1)]^2$$
+    $$ = \frac{1}{2} - (\frac{2}{3})^2$$
+    $$ = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}$$
+
+    Similarly for $Var(Y_2)$, to get $Var(Y_2) = \frac{1}{2}$.
+}
+
+\section{Conditional expectation}
+\dfn{Conditional expectations}{
+    If $Y_1$ and $Y_2$ are any two random variables, the conditional expectation of $g(Y_1)$, given that $Y_2 = y_2$, is defined as follows:
+    \begin{enumerate}
+        \item If $Y_1$ and $Y_2$ are jointly continuous:
+        $$E(g(Y_1) | Y_2 = y_2) = \int_{-\infty}^{\infty} g(y_1) f(y_1 | y_2) dy_1$$
+        where $f(y_1 | y_2)$ is the continuous density function.
+        \item If $Y_1$ and $Y_2$ are jointly discrete:
+        $$E(g(Y_1) | Y_2 = y_2) = \sum_{y_2} g(y_1) p(y_1 | y_2)$$
+        where $p(y_1 | y_2)$ is the probability density function.
+        \item For $g(Y_1) = Y_1$, the conditional expectation $E(Y_1 | Y_2 = y_2)$ is given by:
+        $$E(Y_1 | Y_2 = y_2) = \int_{-\infty}^{\infty} y_1 f(y_1 | y_2) dy_1$$
+        where $f(y_1 | y_2)$ is the conditional density function of $Y_1$ given $Y_2 = y_2$.
+    \end{enumerate}
+}
+
+\ex{}{
+    Recall the soft-drink example.
+
+    \begin{equation}
+        f(y_1, y_2) = 
+        \begin{cases}
+            \frac{1}{2} & 0 \le y_1 \le y_2 \le 2 \\
+            0 & \text{ elsewhere }
+        \end{cases}
+    \end{equation}
+
+    Find the conditional expectation of the amount of the liquid dispensed given $Y_2 = 1.5$
+}
+
+\sol{}{
+    Looking for $E(Y_1 | Y_2 = 1.5)$:
+    $$E(Y_1 | Y_2 = 1.5) = \int_{0}^{y_2} y_1 f(y_1 | y_2) dy_1$$
+    $$ = \int_{0}^{y_2} y_1 \cdot \frac{1}{y_2} dy_1$$
+    $$ = \frac{1}{y_2} \int_{0}^{y_2} y_1 dy_1$$
+    $$ = \frac{1}{y_2} | \frac{y_1^2}{2} |_{0}^{y_2}$$
+    $$ = \frac{y_2^2}{2y_2}$$
+    $$ = \frac{y_2}{2}$$
+
+    $$E(Y_1 | Y_2 = 1.5) = \frac{1.5}{2} = 0.75$$
+
+    Can also find the variance.
+    $$Var(Y_1 | Y_2 = 1.5) = E(Y_1^2 | Y_2 = 1.5) - [E(Y_1 | Y_2 = 1.5)]^2$$
+}
+
+\dfn{Covariance}{
+    $$Cov(Y_1, Y_2) = E[(Y_1 = U_{Y_1}) (Y_2 - U_{Y_2})$$
+    $$ = E(Y_1, Y_2) - E(Y_1) \cdot E(Y_2)$$
+    If $Y_1$ and $Y_2$ are independent, then $E(Y_1, Y_2) = E(Y_1) \cdot E(Y_2)$. This would mean that $Cov(Y_1, Y_2) = 0$.
+}
+
+\section{Independence}
+\dfn{Independence}{
+    If $Y_1, Y_2$ are discrete random variables with joint probability function $p(y_1, y_2)$ and marginal probability functions $p_1 (y_1)$ and $p_2 (y_2)$, respectively, then $Y_1$ and $Y_2$ are independent if and only if:
+    $$p(y_1, y_2) = p_1 (y_1) p_2 (y_2)$$
+    for all pairs of real numbers $(y_1, y_2)$.
+
+    Continuous random variable case:
+    $$f(y_1, y_2) = f_1 (y_1) \cdot f_2 (y_2)$$
+}
+
+\ex{}{
+    Let $Y_1, Y_2$ be joint density function given by
+     \begin{equation}
+        f_{Y_1} (y_1) = 
+        \begin{cases}
+            2y_1 & 0 \le y_1 \le 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+
+    We found that $f_{Y_1} (y_1) = 2y_2$, and that $f_{Y_2} (y_2) = 1$. We can see that:
+    $$f(y_1, y_2) = 2y_1 = f(y_1) \cdot f(y_2)$$
+    Therefore, $Y_1$ and $Y_2$ are independent.
+
+}
+
+\ex{}{
+    Determine whether $X$ and $Y$ are independent, where:
+    \begin{equation}
+        f_{XY} (2,y) = 
+        \begin{cases}
+            3e^{-x-3y} & x, y > 0 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+}
+
+\sol{}{
+    $$f_X (x) = \int_{0}^{\infty} f(x,y_ dy$$
+    $$= \int_{0}^{\infty} 3e^{-x-3y} dy$$
+    $$ = 3 \int_{0}^{\infty} e^{-x} e^{-3y} dy$$
+    $$ = 3e^{-x} | \frac{e^{-3y}}{-3} |_{0}^{\infty}$$
+    $$ = e^{-x} | -e^{-3y} |_{0}^{\infty}$$
+    $$ = e^{-x} | -\frac{1}{e^{3y}} |_{0}^{\infty}$$
+    $$ = e^{-x} [ -0 - (-1))]$$
+    $$ = e^{-x}$$
+
+    $$f_Y (y) = \int_{0}^{\infty} f(x,y) dx$$
+    $$ = \int_{0}^{\infty} 3e^{-x-3y} dx$$
+    $$ = \int_{0}^{\infty} e^{-x} e^{-3y} dx$$
+    $$ = 3e^{-3y} \int_{0}^{\infty} e^{-x} dx$$
+    $$ = 3e^{-3y} | \frac{e^{-x}}{-1} |_{0}^{\infty}$$
+    $$ = 3e^{-3y} - x - 3y$$
+
+    $$f(x,y) = f_X (x) \cdot f_Y (y)$$
+
+    So $X$ and $Y$ are independent.
+}
+
+\ex{}{
+    Determine whether $X$ and $Y$ are independent.
+    \begin{equation}
+        f_X (x,y) = 
+        \begin{cases}
+            8xy & 0 < x < y < 1 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+}
+
+\sol{}{
+    $$f_X (x) = \int_{x}^{1} 8xy dy$$
+    $$ = 8x | \frac{y^2}{2} |_{x}^{1}$$
+    $$ = 4x (1-x^2)$$
+
+    $$f_Y (y) = \int_{0}^{y} 8xy dx$$
+    $$ = 8y | \frac{x^2}{2} |_{0}^{y}$$
+    $$ = 4y \cdot y^2 $$
+    $$ = 4y^3$$
+
+    $$f_X (x) \cdot f_Y (y) = 4x(1-x^2) \cdot 4y^3$$
+    $$ = 16x(1-x^2) y^3$$
+
+    which is not equal to the joint probability density function. So $X$ and $Y$ are not independent.
+}
+
+\section{Central limit theorem}
+
+We can use moment-generating functions to identify distributions.
+
+\thm{}{
+    Let $m_X (t)$ and $m_Y (t)$ denote moment-generating functions of random variables $X$ and $Y$, respectively. If both moment-generating functions exist and $m_X (t) = m_Y (t)$, then for all values of $t$, $X$ and $Y$ have the same probability distribution.
+}
+
+To find a distribution, if $U$ is a function of $n$ random variables, then:
+\begin{enumerate}
+    \item Find $m_U (t) = E[e^{tU}]$
+    \item Compare the expression with the moment-generating function of a known distribution. 
+\end{enumerate}
+
+\thm{}{
+    Let $Y_1, Y_2, ..., Y_n$ be $n$ independent random variables with moment-generating functions $m_{Y_1} (t), m_{Y_2} (t), ..., m_{Y_n} (t)$. If $U = Y_1 + Y_2 + ... + Y_n$, then:
+    $$m_U (t) = m_{Y_1} (t) \cdot m_{Y_2} (t) \cdots m_{Y_n} (t)$$
+}
+
+\ex{}{
+    We are given that the number of customer arrivals in a given time period follows an Poisson distribution. If $Y_1$ denotes the time until the first person's arrival, $Y_2$ the time between the first and second person's arrival, then $Y_n $ would represent the time between the $n$th and $n-1$th person's arrival. It can be shown that all random variables $Y_i$ are independent random variables with exponential distribution density function:
+    \begin{equation}
+        f_{Y_i} (y_i) = 
+        \begin{cases}
+            \frac{1}{\theta} e^{-y_i / \theta} & y_i > 0 \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation}
+    Find the PDF for the waiting time from the opening of the store until the $n$th customer.
+}
+
+\sol{}{
+    We see that $E(Y_i) = \theta$, by the exponential distribution. Therefore, to generate our moment-generating function, we can use the moment-generating function:
+    $$m_{Y_i} (t) = (1-\theta t)^{-1}$$
+    Therefore:
+    $$m_{U} (t) = (1-\theta t)^{-1} \cdot (1-\theta t)^{-1} ... \cdot (1-\theta t)^{-1}$$
+    $$ = (1-\theta t)^{-n}$$
+
+    We recognize this as the moment-generating function of a gamma-distributed random variable with $\alpha = n$ and $\beta = \theta$. So the density function of $U$ is given by:
+
+    \begin{equation}
+        f_U (u) = 
+        \begin{cases}
+            \frac{1}{\Gamma (n) \theta ^n} (u^{n-1} e^{-u / \theta}) & u > 0 \\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+}
+
+\ex{}{
+    Let $Y_1$ and $Y_2$ be 2 random variables, each representing the length of life of a component in a system. We have that both $Y_1$ and $Y_2$ follow an exponential distribution with mean 1. That is:
+    $$Y_1 \sim exp(\theta = 1)$$
+    $$Y_2 \sim exp(\theta = 1)$$
+    Find the density function for the average life length of these components, $U = \frac{Y_1 + Y_2}{2}$.
+}
+
+\sol{}{
+    The probability density function of both $Y_1$ and $Y_2$ can be expressed as $p(Y_i = y) = e^{-y}$. Then our moment-generating functions are also:
+    $$m_{Y_i} (t) = \frac{1}{1-t}$$
+    Let $S = Y_1 + Y_2$. Then:
+    $$m_{S} (t) = (\frac{1}{1-t})^2$$
+    We see that this is a gamma distribution with $\alpha = 2, \beta = 1$. Hence, the probability density function over its support is:
+    $$f_S (s) = \frac{1}{\Gamma (2) 1^2} (u^{2-1} e^{-u / 1})$$
+    Using that $\Gamma (2) = (2-1)! = 1$:
+    $$f_S (s) = se^{-s}$$
+    Now we transform this to get $U = \frac{Y_1 + Y_2}{2}$:
+    $$U = \frac{S}{2}$$
+    $$S = g^{-1} (u) = 2U$$
+    Differentiating our inverse function:
+    $$\frac{d g^{-1} (u)}{du} = 2$$
+    So:
+    $$f_U (U) = f_S (g^{-1} (u)) \cdot \frac{d g^{-1} (u)}{du}$$
+    $$ = f_S (2U) \cdot 2$$
+    $$ = (2u) e^{-2U} \cdot 2$$
+    $$ = 4ue^{-2u}$$
+    Therefore:
+    $$f_U (u) = 4ue^{-2u}$$
+}
+
+\thm{}{
+    Let $Y_1, Y_2, ... , Y_n$ be independently normally distributed variables with $E_{i} = \mu_i$ and $V(Y_i) = \sigma_i^2$ for $i = 1, 2, ..., n$. Let $a_1, a_2, ..., a_n$ be coefficients. If
+    $$U = \sum_{i=1}^{n} a_i Y_i = a_1 Y_1 + a_2 Y_2 + ... + a_n Y_n$$
+    Then:
+    $$E(U) = \sum_{i=1}^{n} a_i \mu_i$$
+    $$V(U) = \sum_{i=1}^{n} a_i^2 \sigma_i^2$$
+}
+
+\thm{}{
+    Let $Y_1, Y_2, ... , Y_n$ be a random sample of size $n$ from a normal distribution with mean $\mu$ and variance $\sigma ^2$. Then
+    $$\overline{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i$$
+    is also normally distributed, with mean $\mu_Y = \mu$ and variance $\sigma^{2}_{\overline{Y}} = \sigma^2 / n$. This is therefore the \textbf{sample mean}. In other words, if $S = Y_1 + Y_2 + ... + Y_n$, then:
+    $$E(S) = n \mu$$
+    $$V(S) = n \sigma ^2$$
+}
+
+\thm{Central Limit Theorem}{
+    Let $Y_1, Y_2, ..., Y_n$ be independently and \textbf{identically distributed} random variables with $E(Y_i) = \mu$ and $V(Y_i) = \sigma ^2 < \infty$. Define:
+    $$U_n = \frac{\overline{Y} - \mu}{\sigma / \sqrt{n}}$$
+    where $\overline{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i$. Then the distribution function of $U_n$ converges to the \textbf{standard normal distribution} as $n \rightarrow \infty$. That is:
+    $$\lim_{n \rightarrow \infty} P(U_n \le u) = \int_{-\infty}^{u} \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} dt$$
+    for all $u$. That is, $U_n \sim N(0, 1)$.
+}
+
+\ex{}{
+    160 people have booked a flight, but there are only 155 seats. The airline expects that $95\%$ of people will show to the flight. Find the probability that all people who show up to the flight will have a seat.
+}
+
+\sol{}{
+    Let $X_i$ be the random variable representing whether a person shows up. We have that $X_i$ is modelled by the Bernoulli distribution. Then:
+    $$E(X_i) = 0.95$$
+    $$V(X_i) = p(1-p) = 0.95 \cdot 0.05 = 0.0475$$
+    We have $n = 160$. Let $U = X_1 + X_2 + ... + X_{160}$ be the random variable representing the number of people who show up to the flight. We find that $E(U) = 160 \mu = 160 (0.95) = 152$. Also, $V(Y) = 160 \sigma ^2 = 160 (0.0475)  = 7.6$. We are looking for $P(U \le 155)$. To do this, we can normalize our distribution from the normal distribution, by applying our $z$-score:
+    $$z = \frac{155 - E(U)}{\sigma(U)} = \frac{155 - 152}{2.76} \approx 1.09$$
+    Then 
+    $$P( U \le 155) = P(Z \le 1.09)$$
+    $$ \approx 0.862$$
+}
+
+\ex{}{
+    Let a student's mean test score be $\mu = 14$. The variance of this test score is $\sigma^2 = 2^2$. We pick a random sample of $100$ students. Find the range of scores between which $95\%$ of students' scores are expected to lie.
+}
+
+\sol{}{
+    First, we find the $z$-values between which $95\%$ of values lie. This is $P(-1.96 < z < 1.96) = 0.95$. Transform both of these to the values we want $\overline{Y} = a, b$ such that:
+    $$-1.96 = \frac{a - \mu}{\sigma / \sqrt{n}} $$
+    $$1.96 = \frac{b - \mu}{\sigma / \sqrt{n}}$$
+    We see that $\mu = 14$, $\sigma = 2$, $\sqrt{n} = 10$.
+    $$-1.96 = \frac{a - 14}{2 / 10}$$
+    $$a \approx 13.608$$
+    $$1.96 = \frac{b - 14}{2 / 10}$$
+    $$b \approx 14.392$$
+}

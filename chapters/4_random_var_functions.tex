@@ -1,0 +1,431 @@
+\chapter{Functions of random variables}
+
+\section{Finding functions of random variables}
+\subsection{Using the CDF}
+Let $X$ be a continuous random variable and $Y = f(X)$ be a function of $X$. Then $Y$ is a continuous random variable too. This method consists of two steps.
+\begin{enumerate}
+    \item Find the CDF of $Y$.
+    \item Differentiate the CDF to find the PDF of $Y$.
+\end{enumerate}
+
+\ex{}{
+    Let $X$ be a random variable with PDF:
+    \begin{equation}
+        f_X (x) = 
+        \begin{cases}
+            2e^{-2x} & \text{ for } x > 0\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Recall that:
+    \begin{equation}
+        f(x) = 
+        \begin{cases}
+            \frac{1}{\beta} e^{-x / \beta} & \text{ if } x > 0\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    $X \sim exp(\beta), E(X) = \beta$ and $Var(X) = \beta ^2$. Determine the PDF of $Y = \sqrt{X}$. 
+}
+
+\sol{}{
+    First observe that if $x \ge 0$, $y \ge 0$, and when $x < 0$, $y$ is not defined. So support is the same.
+
+    $$P(Y \le y) = P(\sqrt{X} \le y)$$
+    $$= P(X \le y^2)$$
+    See that $F_Y (y) = F_X (y^2)$. Now we differentiate the $CDF$ of $Y$ to find $PDF$ of $Y$.
+    $$F_Y ' (y) = \frac{d}{dx} (F_X (y^2))$$
+    $$P(X \le y^2) = \int_{0}^{y^2} 2e^{-2x} dx$$
+    $$ = | \frac{2e^{-2x}}{-2} \Big|_{0}^{y^2}$$
+    $$ = | - e^{-2x} \Big|_{0}^{y^2}$$
+    $$ = -  e^{-2y^2} - (-1)$$
+    $$ = 1 - e^{-2y^2}$$
+
+    Now differentiate with respect to $y$:
+    $$F'(y) = \frac{d}{dy} (1 +- e^{-2y^2})$$
+    $$ = -e^{-2y^2} \cdot (4y)$$
+    $$= 4ye^{-2y^2}$$
+
+    \begin{equation}
+        f_Y (y) = 
+        \begin{cases}
+            4y e^{-2y^2} & y > 0\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+}
+
+\ex{}{
+    The amount of sugar produced by a manufacturing plant is a random variable denoted by $Y$ with PDF:
+    \begin{equation}
+        f_Y (y) = 
+        \begin{cases}
+            2y & 0 \le y \le 1\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Let $U$ be the profit given by 
+    $$U = 3Y - 1$$
+    Find the PDF of $U$.
+}
+
+\sol{}{
+    Find the CDF of $U$ in terms of the CDF of $Y$. 
+    $$P(U \le u) = P(3Y - 1 \le u)$$
+    Looking for $P(Y \le \frac{u+1}{3})$. 
+
+    The support for $y$ is $0 \le y \le 1$. So $0 \le \frac{u+1}{3} \le 1$. The support for $y$ is therefore:
+    $$ 0 \le u + 1 \le 3$$
+
+    $F_Y (\frac{u+1}{3}) = \int_{0}^{\frac{u+1}{3}} 2y dy$
+    $$= | \frac{2y^2}{2} \Big|_{0}^{\frac{u+1}{3}}$$
+    $$ = ( \frac{u+1}{3})^2$$
+
+    $$F_U (u) = F_Y (\frac{u+1}{3}) = (\frac{u+1}{3})^2$$
+    $$F_U ' (u) = \frac{d}{du} (\frac{u+1}{3})^2 = \frac{2}{9} (u+1)$$
+
+    \begin{equation}
+        f_U (u) = 
+        \begin{cases}
+            \frac{2}{9} (u+1) & -1 \le u \le 2\\
+            0 & \text{ otherwise}
+        \end{cases}
+    \end{equation}
+}
+
+\subsection{Change of variable technique}
+Let $X$ be a continuous random variable with CDF $F_X (x)$ and PDF $f_X (x)$. Let $Y = g(X)$ for some function $g$. If $g$ is strictly increasing or strictly decreasing, then we proceed as follows to find the PDF of $Y$.
+\begin{enumerate}
+    \item Write the CDF of $Y$ in terms of the CDF of $X$. So we have $P_Y (y) = P(Y \le y) = P(g(x) \le y)$. As $x_2 > x_1$, $g(x_2) > g(x_1)$. So we have that:
+    $$F_Y (y) = P( x \le g^{-1} (y))$$
+    $$ = F_X (g^{-1} (y))$$
+    \item Differentiate the above expression with respect to $y$. 
+    $$F_Y' (y) = f_Y (y) = F'_X (g^{-1} (y)) \cdot \frac{d}{dy} (g^{-1} (y))$$
+    $$ = f_X (g^{-1}(y)) \cdot | \frac{d}{dy} (g^{-1} (y)) |$$
+    $$= f_X (g^{-1} (y)) \cdot | \frac{d}{dy} (x) |$$
+\end{enumerate}
+
+Basically, find an expression for $X$ in terms of $Y$ to get $g^{-1} (y)$. Then  find the derivative of $g^{-1}(y)$. Plug into this formula:
+$$f_Y (y) = f_X (g^{-1} (y)) \cdot | \frac{d}{dy} g^{-1} (y) |$$
+        
+
+\ex{}{
+    Let $Y = \sqrt{X}$ where the PDF of $X$ is:
+    \begin{equation}
+        f_X (x) = 
+        \begin{cases}
+            2e^{-2x} & x \ge 0\\
+            0 & \text{ otherwise}
+        \end{cases}
+    \end{equation}
+
+    This is an exponential distribution with $\beta = \frac{1}{2}$. 
+}
+
+\sol{}{
+    Set $F_Y (y) = P(Y \le y) = P(\sqrt{X} \le y)$
+    $$ = P(X \le y^2)$$
+    $$ = F_X (y^2)$$
+
+    Now we differentiate:
+    $$F_Y ' (y) = f_Y (y)$$
+    $$= F_X ' (y^2) \frac{d}{dy} (y^2)$$
+    $$ = f_X (y^2) \cdot (2y)$$
+    $$= 2e^{-2y^2} \cdot 2y $$
+    $$ = 4e^{-2y^2}$$
+
+    when $y \ge 0$, 0 otherwise.
+}
+
+\ex{}{
+    Use the transformation method to find the PDF of $Z = \frac{x- \mu}{\sigma}$. 
+}
+
+\sol{}{
+    Know the PDF of $X$:
+    \begin{equation}
+        f_X (x) = \frac{1}{\sqrt{2 \pi}} \cdot \frac{1}{\sigma} e^{-\frac{1}{2} (\frac{x - \mu}{\sigma})^2}
+    \end{equation}
+
+    Now we write $F_Z (z)$ in terms of $x$:
+    $$F_Z (z) = P( \frac{x - \mu}{\sigma} \le z)$$
+    $$ = P( x \le \mu + \sigma z)$$
+    $$ = F_X (\mu + \sigma z)$$
+
+    Differentiate our CDF to find our PDF:
+    $$f_Z (z) = F'_Z (z)$$
+    $$ = \frac{d}{dz} (F_x (\mu + \sigma z))$$
+    $$ = F'_X (\mu + \sigma z ) \cdot \frac{d}{dz} (\mu + \sigma z)$$
+    $$ = f_X (\mu + \sigma z ) \cdot \sigma$$
+    $$ = \frac{1}{\sqrt{2 \pi}} \cdot \frac{1}{\sigma} e^{\frac{-1}{2} (\frac{\mu + \sigma z - \mu}{\sigma})^2} \times \sigma$$
+    $$ = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2}$$
+
+    For $ -\infty < x < \infty$, $- \infty < z < \infty$. See that $Z \sim N (0, 1)$. 
+}
+
+\ex{}{
+    Let $Z \sim N(0, 1)$, then show that $Z^2 \sim \chi ^2 (1)$. Recall that $\chi ^2 (U)$ is a special case of $Gamma(\alpha, \beta)$ where $\alpha = U/2$ and $\beta = 2$.
+}
+
+\sol{}{
+    Let $Y = Z^2$. 
+    $$F_Y (y) = P(Y \le y) = P( Z^2 \le y)$$
+    Have that
+    $$Z^2 \le y$$
+    $$\implies \pm z \le \sqrt{y}$$
+    $$\implies z \le \sqrt{y}$$
+    $$ -z \le \sqrt{y}$$
+    $$ -\sqrt{y} \le z \le \sqrt{y}$$
+    Therefore:
+    $$= P(- \sqrt{y} \le Z \le \sqrt{y})$$
+    $$ = P(Z \le \sqrt{y}) - P(Z \le - \sqrt{y})$$
+    $$= F_Z (\sqrt{y}) - F_Z (-\sqrt{y})$$
+
+    Now we can differentiate:
+    $$f_Y (y) = F_Y' (y) = F_Z' (\sqrt{y}) \cdot \frac{d}{dz} (\sqrt{y}) - F_Z ' (-\sqrt{y}) \cdot \frac{d}{dz} (-\sqrt{y})$$
+    $$f_Y (y) = f_Z (\sqrt{y}) \cdot \frac{1}{2} y^{-1/2} - f_z (-\sqrt{y}) \cdot (-\frac{1}{2} y^{-1/2})$$
+    $$ = \frac{1}{2} y^{-1/2} (f_Z (\sqrt{y}) + f_Z (-\sqrt{y}))$$
+    Due to symmetry, $f_Z (\sqrt{y}) = f_Z (\sqrt{-\sqrt{y}}$.
+    $$ = \frac{1}{2} y^{-1/2} (2 f_Z (\sqrt{y}))$$
+    $$ = y^{-1/2} f_Z (\sqrt{y})$$
+    Important that $y \ge 0$. 
+    $$ = y^{-1/2} \cdot \frac{1}{2 \pi} e^{-1/2 y}$$
+
+    Let $x \sim Gamma(\alpha, \beta)$.
+    $$f_X (x) = \frac{1}{\Gamma (\alpha) \beta ^{\alpha} } x^{\alpha - 1} e^{-x / \beta}$$
+
+    Rewrite expression in this form:
+    $$= \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{\pi}} y^{-1/2} e^{-y/2}$$
+    Recall that $\Gamma (1/2) = \sqrt{\pi}$. 
+    $$ = \frac{1}{2^{1/2}} \frac{1}{\Gamma 1/2} y^{1/2 - 1} \cdot e^{-y/2}$$
+    This is exactly the $\chi^2 (1) $ distribution, where $\alpha = 1/2$ and $\beta = 2$. 
+    
+}
+
+\subsection{Probability integral transformation}
+\thm{}{
+    Let $X$ be a continuous random variable with CDF $F_X ()$. Then the function $F_X (X)$ (notice that this is a different random variable) is uniformly distributed, i.e.
+    $$F_X (x) \sim U[ 0, 1 ]$$
+}
+
+\nt{
+    Note that $F_X (X)$ is not a probability. Whereas $F_X (x)$ is a probability. Therefore:
+    $$F_X (X) \not = P( X \le X)$$
+    So $F_X (x)$ gives cumulative probabilities, but $F_X (X)$ is a transformation of $X$ and $F_X (X) \sim U[0, 1]$. 
+}
+
+\ex{}{ 
+    Let $X$ be a continuous random variable with PDF:
+    \begin{equation}
+        f_X (x) = 
+        \begin{cases}
+            3x^2 & 0 < x < 1\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Show that $F_X (X) \sim Unif(0, 1)$.
+}
+
+\sol{}{
+    Let us find $F_X (X) = \int_{0}^{X} 3t^2 dt$. 
+    $$ = | \frac{3t^3}{3} \Big|_{0}^{X}$$
+    $$ = X^3$$
+
+    Now we have obtained the transformation:
+    $$F_X (X) = X^3$$
+    This is a new function of $X$. Let $U = X^3$. We have to show that $U = X^3 \sim Unif(0, 1)$. 
+
+    First, express $F_U (u) = P(U \le u) = P( X^3 < u) = P( X \le U^{1/3})$
+    $$ = F_X (u^{1/3})$$
+
+    Now differentiate:
+    $$f_U (u) = F'_U (u) = F'_X (u^{1/3}) \cdot \frac{d}{du} u^{1/3}$$
+    $$ = f_X (u^{1/3}) \cdot \frac{1}{3} u^{-2/3}$$
+    $$ = 3(u^{1/3})^2 \cdot \frac{1}{3} u^{-2/3}$$
+    $$ = u^{2/3} \cdot u^{-2/3} = 1$$
+    $$f_U (u) = 1$$
+
+    Therefore $u \sim Unif(0, 1)$. 
+}
+
+\ex{}{  
+    Let $X \sim exp(\beta)$, where
+    \begin{equation}
+        f_X (x) =
+        \begin{cases}
+            \frac{1}{\beta} e^{-x /\beta} & x \ge 0\\
+            0 & \text{ otherwise }
+        \end{cases}
+    \end{equation}
+    Show that $F_X (X) \sim Unif(0, 1)$.
+}
+
+\sol{}{ 
+    First, find $F_X (x)$. 
+    $$F_X (x) = \int_{0}^{X} \frac{1}{\beta} e^{-x / \beta}$$
+    $$ = \frac{1}{\beta} \int_{0}^{x} e^{\frac{-x}{\beta}}$$
+    $$ = \frac{1}{\beta} (-\beta) e^{-x / \beta} \Big|_{0}^{x}$$
+    $$ = 1-e^{-x / \beta}$$
+
+    Now we have $$F_X (x) = -e^{ - X / \beta}$$
+    Let $U = 1 - e^{-x / \beta} $. Then $x = - \beta ln (1 - U)$. So:
+    $$F_X (- \beta ln(1 -U)))$$
+
+    Differentiating:
+    $$f_U (u) = F'_X (- \beta ln(1-u)) \cdot \frac{d}{du} (-\beta ln(1-u))$$
+    $$= f_X (- \beta ln(1-u)) \cdot \frac{\beta}{1 - u} $$
+    $$ = \frac{1}{\beta} e^{\frac{-(-\beta ln(1-u))}{\beta}} \cdot \frac{\beta}{1-u}$$
+    $$ = \frac{1}{\beta} e^{ln(1-u)} \cdot \frac{\beta}{1 - u}$$
+    $$ = \frac{1}{\beta} ln(1-u) \frac{\beta}{1-u}$$
+    $$ = 1$$
+
+    We see that $0 \le u \le 1$ in order for $x$ to be defined. AKA $u \ge 0$. So $u \sim Unif(0, 1)$. 
+}
+
+\pf{Proof}{
+    Let $X$ be a continuous random variable. Let $P(X \le x) = F_X (x)$. We get a new function of $x$ from the CDF by replacing 'x' by $X$. Let $U = F_X (X)$. Want to find the pdf of U.
+
+    $$F_U (u) = P(U \le u)$$
+    $$ = P(F_X (X) \le u)$$
+    $$=P(X \le F_X ^{-1} (u))$$
+    $$ = F_X (F_X ^{-1} (u))$$
+    $$ = u$$
+
+    This is the PDF of the uniform random $U$ over the interval $[0,1]$. Therefore $F_X (X) \sim Unif(0, 1)$
+
+}
+
+\nt{
+    Suppose we want to generate random variables from the exponential distribution $exp( \beta)$. 
+    \begin{enumerate}
+        \item Simulate $U \sim Unif(0,1)$.
+        \item $U = F_X (X)$ equal to transformation obtained from the CDF.
+        \item Find $X = F_X ^{-1} (U)$.
+    \end{enumerate}
+}
+
+\section{Moment generating functions}
+\dfn{Moment generating function}{
+    The moment generating function (mgf) of the distribution of the random variable $X$ is the function of a real parameter $t$ defined by:
+    $$M_X (t) = E[e^{tX}]$$
+    for all $t \in R$ for which the expectation $E[e^{tX}]$ is well defined.
+}
+
+From the MGF, we have:
+\begin{enumerate}
+    \item For the discrete random variables, MGF is:
+    $$M_X (t) = E[e^{tx}]$$
+    $$= \sum_{\text{all } x} e^{tx} P(X = x)$$
+    Where $P(X = x)$ is just the PMF of $X$.
+    \item For continuous random variables, 
+    $$M_X (t) = E[e^{tX}]$$
+    $$ = \int_{-\infty}^{\infty} e^{tx} f_X (x) dx$$
+\end{enumerate}
+
+Note that the PDF (or PMF) of the random variable $X$ can be obtained from its moment generating function and vice-versa.
+
+Let $X$ be a continuous random variable. Then 
+$$M_X (t) = E[e^{tx}]$$
+$$ = \int_{-\infty}^{\infty} e^{tx} f_X (x) dx$$
+$$M'_X (t) = \frac{d}{dt} \int_{-\infty}^{\infty} e^{tx} f(x) dx$$
+$$ = \int_{-\infty}^{\infty} \frac{d}{dt} e^{tx} f_X (x) dx$$
+$$ = \int_{-\infty}^{\infty} e^{tx} x f_X (x) dx$$
+
+$$M_X ' (t) \Big|_{t=0} $$
+$$ = \int_{-\infty}^{\infty} e^{0} x f_X (x) dx$$
+$$ = \int_{-\infty}^{\infty} x f_X (x) dx$$
+$$M_X (t) \big|_{t=0} = E(X)$$
+
+The first derivative of $M_X (t)$ evaluated at $t =0$ gives $E(X)$. This is the first moment about the origin.
+
+Similarly, $M_X'' (t) \big|_{t=0} = E(x^2)$
+
+Generalizing
+$$M_X^{(k)} (t) \big|_{t=0} = E(X^k)$$
+
+\ex{}{
+    Let $X \sim Binom(n,p)$. 
+    \begin{enumerate}
+        \item Find the moment generating function of the distribution of $X$.
+        \item Show that $M_X ' (t) \big|_{t=0} = E(X) = np$. 
+        \item Show that $M_X '' (t) = E(x^2) = n^2p^2 - np^2 + np$
+        \item Find $Var(X)$.
+    \end{enumerate}
+
+}
+
+\sol{}{
+    (1) 
+    $$M_X (t) = E[e^{tx} ]$$
+    $$ = \sum_{x=0}^{n} e^{tx} \binom{n}{x} p^{x} (1-p)^{n-x}$$
+    $$ = \sum_{x=0}^{n} \binom{n}{x} (pe^t)^x (1-p)^{n-x}$$
+
+    Binomial form:
+    $$(a+b)^n = \sum_{x=0}^{n} \binom{n}{x} a^x b^{n-x}$$
+
+    Using this, we get:
+    $$M_X (t) = (pe^{t} + 1-p)^n$$
+
+    (2)
+    $$M_X'(t) = \frac{d}{dt} (pe^{t} + 1-p)^n$$
+    $$ = n(pe^t + 1 - p)^{n-1} \cdot pe^t$$
+    $$M_X'(t) \big|_{t=0} n(pe^0 + 1-p)^{n-1} \cdot pe^0$$
+    $$ = n(p + 1 - p)^{n-1} \cdot p$$
+    $$ = np = E(X)$$
+
+    (3)
+    $$M_X '' (t) \big|_{t=0} = E(x^2)$$
+    Since we have $M_X' (t)$, differentiate again:
+    $$M_X ''(t) = \frac{d}{dt} [n(pe^t + 1 - p)^{n-1} \cdot pe^t ]$$
+    $$= n(n-1)(pe^t + 1 - p)^{n-2} \cdot (pe^t)^{2} + n(1-p+pe^{t})^{n-1} \cdot pe^t$$
+
+    Substitute $t = 0$.
+}
+
+\qs{}{
+    Let $X \sim Poiss(x, \lambda)$. Show that $E(X) = M'_X (t) \big|_{t=0}$ and that $E(X^2) = M''_X (t) \big|_{t=0}$.  Note that $P(X = x) = \frac{e^{-\lambda} \lambda^{x}}{x!}$. Use the Maclaurin's series. 
+}
+
+\qs{}{
+    Let $X \sim Gamm(X, \lambda)$. Show that $M_X (t) = \frac{1}{(1-BtP^{\alpha}}$. Hint: set up your expression as the gamma function instead of evaluating the integral.
+}
+
+\ex{}{
+    The normal distribution. Start with $Z \sim N(0,1)$. 
+    Recall the normal distribution:
+    $$f_Z (z) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2}$$
+    $$M_Z (t) = E(e^{tz}) = \int_{-\infty}^{\infty} e^{tz} f_Z (z) dz$$
+    $$ = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{{tz} - \frac{1}{2} z^2} dz$$
+    Completing the square:
+    $$tz - \frac{1}{2} z^2$$
+    $$ = \frac{-1}{2} (z^2 - 2tz + t^2) + \frac{1}{2} t^2$$
+    $$ = - \frac{1}{2} (z-t)^2 + \frac{1}{2}^{2}$$
+
+    So:
+    $$= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{-\frac{1}{2} (z-t)^2 + \frac{1}{2} t^2} dz$$
+    $$ = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{-\frac{1}{2} (z-t)^2} \cdot e^{\frac{1}{2} t^2} dz$$ 
+    $$ = e^{\frac{1}{2} t^2} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}}  e^{-\frac{1}{2} (z-t)^2} dz$$
+    $$ = e^{\frac{1}{2} t^2}$$
+    This is the PDF of the normal distribution with $\sigma = 1$ and $\mu = t$. 
+}
+
+Result: Let $X$ be a random variable with the moment generating function $M_X (t)$. Let $Y = ax + b$. Then
+$$M_Y (t) = e^{bt} M_X (at)$$
+
+To establish this result, consider:
+$$M_Y (t) = E[e^{yt}]$$
+$$ = E[e^{t(ax+bt)} ]$$
+$$ = E[e^{axt + bt}]$$
+$$ = E[e^{axt} \cdot e^{bt}]$$
+$$ = e^{bt} E[xat]$$
+$$ = e^{bt} M_X (at)$$
+
+This is a scaling.
+
+\ex{}{
+    Consider $X \sim N(\mu, \sigma^2)$. 
+    $$X = \mu + \sigma Z$$ 
+    where $Z \sigma N(0,1)$. In order to find $M_X (t)$:
+    $$M_X (t) = M_{\mu + \sigma z} (t)$$
+    $$ = e^{\mu t} M_Z (\sigma t)$$
+}
